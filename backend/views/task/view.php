@@ -1,8 +1,13 @@
 <?php
 
-use common\models\User;
+use common\models\Project;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+
+// Models
+use common\models\Status;
+use common\models\User;
 
 /** @var yii\web\View $this */
 /** @var common\models\Task $model */
@@ -33,8 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description:ntext',
-            'project_id',
-            'status_id',
+            [
+                'attribute' =>'project_id',
+                'value' => $model->getProject($model),
+                'filter' => ArrayHelper::map(Project::find()->all(),'id','name'),
+            ],
+            [
+                'attribute' =>'status_id',
+                'value' => $model->getStatus($model->status_id),
+                'filter' => ArrayHelper::map(Status::find()->all(),'id','description'),
+            ],
             'created_at',
             'updated_at',
             [

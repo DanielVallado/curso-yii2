@@ -2,9 +2,10 @@
 
 namespace common\models;
 
-use Yii;
+//use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 
 /**
@@ -75,8 +76,8 @@ class Task extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Nombre',
             'description' => 'Descripción',
-            'project_id' => 'Proyecto ID',
-            'status_id' => 'Estatus ID',
+            'project_id' => 'Proyecto',
+            'status_id' => 'Estatus',
             'created_at' => 'Creado En',
             'updated_at' => 'Actualizado En',
             'created_by' => 'Creado Por',
@@ -87,7 +88,7 @@ class Task extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Project]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getProject()
     {
@@ -97,7 +98,7 @@ class Task extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Status]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getStatus()
     {
