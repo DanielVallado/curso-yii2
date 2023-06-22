@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,9 +37,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'status_id',
             'created_at',
             'updated_at',
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => getUsername($model->updated_by)
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => getUsername($model->updated_by)
+            ],
         ],
     ]) ?>
 
 </div>
+
+<?php
+function getUsername($userId): ?string
+{
+    return User::findOne($userId)->username ?? null;
+}
+?>

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /** @var common\models\Project $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -31,12 +32,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'description:ntext',
+            'description:text',
             'created_at',
             'updated_at',
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => getUsername($model->updated_by)
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => getUsername($model->updated_by)
+            ],
         ],
     ]) ?>
 
 </div>
+
+<?php
+function getUsername($userId): ?string
+{
+    return User::findOne($userId)->username ?? null;
+}
+?>
