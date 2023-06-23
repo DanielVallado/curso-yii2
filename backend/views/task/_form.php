@@ -21,7 +21,7 @@ use common\models\Project;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(Project::find()->all(), 'id', 'name')) ?>
+    <!--<?= $form->field($model, 'project_id')->textInput() ?>-->
 
     <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map(Status::find()->all(), 'id', 'description')) ?>
 
