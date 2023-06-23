@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             [
                 'attribute' =>'project_id',
-                'value' => $model->getProject($model),
+                'value' => $model->project->name,
                 'filter' => ArrayHelper::map(Project::find()->all(),'id','name'),
             ],
             [
                 'attribute' =>'status_id',
-                'value' => $model->getStatus($model->status_id),
+                'value' => $model->status->description,
                 'filter' => ArrayHelper::map(Status::find()->all(),'id','description'),
             ],
             'created_at',
