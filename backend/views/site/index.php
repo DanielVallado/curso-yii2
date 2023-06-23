@@ -8,12 +8,12 @@ $this->title = 'Gestor de Proyectos';
 
     <div class="jumbotron text-center bg-transparent">
         <?php if (!Yii::$app->user->isGuest): ?>
-            <h1 class="display-4">¡<?= Yii::$app->user->identity->username ?> bienvenido al Gestor de Proyectos!</h1>
+            <h1 class="display-4">¡<?= Yii::$app->user->identity->username ?> Bienvenido al Gestor de Proyectos!</h1>
         <?php else: ?>
             <h1 class="display-4">¡Bienvenido al Gestor de Proyectos!</h1>
         <?php endif; ?>
 
-        <p class="lead">Este es un gestor de proyectos y tareas elaborado en Yii2.</p>
+        <p class="lead">Este es un gestor de proyectos y tareas elaborado con Yii2.</p>
 
         <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
     </div>

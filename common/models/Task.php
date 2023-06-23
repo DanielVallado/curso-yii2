@@ -104,4 +104,9 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Status::class, ['id' => 'status_id']);
     }
+
+    public function getUsername($id)
+    {
+        return User::findIdentity($id)->username;
+    }
 }

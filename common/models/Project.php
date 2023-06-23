@@ -10,6 +10,9 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
+// Models
+use common\models\User;
+
 /**
  * This is the model class for table "project".
  *
@@ -111,5 +114,10 @@ class Project extends ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('project_user', ['project_id' => 'id']);
+    }
+
+    public function getUsername($id)
+    {
+        return User::findIdentity($id)->username;
     }
 }

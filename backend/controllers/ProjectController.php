@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Project;
 use common\models\search\ProjectSearch;
+use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,8 +56,13 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new TaskSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams, $id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

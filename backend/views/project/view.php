@@ -1,16 +1,29 @@
 <?php
 
-use common\models\User;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+use yii\grid\SerialColumn;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\YiiAsset;
 use yii\widgets\DetailView;
+
+// Models
+use common\models\Project;
+use common\models\Status;
+use common\models\Task;
 
 /** @var yii\web\View $this */
 /** @var common\models\Project $model */
+/** @var common\models\search\TaskSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+YiiAsset::register($this);
+
 ?>
 <div class="project-view">
 
@@ -21,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro de eliminar el proyecto "' . $model->name . '"?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,27 +43,66 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
             'description:text',
             'created_at',
             'updated_at',
             [
                 'attribute' => 'created_by',
-                'value' => getUsername($model->updated_by)
+                'value' => $model->getUsername($model->created_by)
             ],
             [
                 'attribute' => 'updated_by',
-                'value' => getUsername($model->updated_by)
+                'value' => $model->getUsername($model->updated_by)
+            ],
+        ],
+    ]) ?>
+
+    <p>
+        <?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => SerialColumn::class],
+
+            //'id',
+            'name',
+            'description:ntext',
+            [
+                'attribute' =>'project_id',
+                'value' => static function($model)
+                {
+                    return Project::findOne($model)->name;
+                },
+                'filter' => ArrayHelper::map(Project::find()->all(),'id','name'),
+            ],
+            [
+                'attribute' =>'status_id',
+                'value' => static function($model)
+                {
+                    return Status::findOne($model)->description;
+                },
+                'filter' => ArrayHelper::map(Status::find()->all(),'id','description'),
+            ],
+            //'status_id',
+            //'created_at',
+            //'updated_at',
+            //'created_by',
+            //'updated_by',
+            [
+                'class' => ActionColumn::class,
+                'urlCreator' => static function ($action, Task $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
             ],
         ],
     ]) ?>
 
 </div>
 
-<?php
-function getUsername($userId): ?string
-{
-    return User::findOne($userId)->username ?? null;
-}
-?>

@@ -52,20 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             [
                 'attribute' => 'created_by',
-                'value' => getUsername($model->updated_by)
+                'value' => $model->getUsername($model->updated_by)
             ],
             [
                 'attribute' => 'updated_by',
-                'value' => getUsername($model->updated_by)
+                'value' => $model->getUsername($model->updated_by)
             ],
         ],
     ]) ?>
 
 </div>
 
-<?php
-function getUsername($userId): ?string
-{
-    return User::findOne($userId)->username ?? null;
-}
-?>
