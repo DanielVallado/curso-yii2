@@ -9,7 +9,8 @@ use yii\widgets\DetailView;
 /** @var common\models\ProjectUser $model */
 
 $this->title = $model->project->name;
-$this->params['breadcrumbs'][] = ['label' => 'Asignación de Proyectos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->project->name, 'url' => ['project/view', 'id' => $model->project_id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Eliminar', ['delete', 'project_id' => $model->project_id, 'user_id' => $model->user_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro de eliminar la asignación?',
                 'method' => 'post',
             ],
         ]) ?>

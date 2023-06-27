@@ -74,7 +74,7 @@ class ProjectUserController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'project_id' => $model->project_id, 'user_id' => $model->user_id]);
+                return $this->redirect(['project/view', 'id' => $model->project_id, 'class' => 'project']);
             }
         } else {
             $model->loadDefaultValues();
@@ -98,7 +98,7 @@ class ProjectUserController extends Controller
         $model = $this->findModel($project_id, $user_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'project_id' => $model->project_id, 'user_id' => $model->user_id]);
+            return $this->redirect(['project/view', 'id' => $model->project_id, 'class' => 'project']);
         }
 
         return $this->render('update', [
@@ -116,9 +116,10 @@ class ProjectUserController extends Controller
      */
     public function actionDelete($project_id, $user_id)
     {
+        $model = $this->findModel($project_id, $user_id);
         $this->findModel($project_id, $user_id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['project/view', 'id' => $model->project_id, 'class' => 'project']);
     }
 
     /**

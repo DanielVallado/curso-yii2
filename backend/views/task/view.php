@@ -12,7 +12,8 @@ use common\models\Status;
 /** @var common\models\Task $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tareas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->project->name, 'url' => ['project/view', 'id' => $model->project_id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro de eliminar la tarea "' . $model->name . '"?',
                 'method' => 'post',
             ],
         ]) ?>

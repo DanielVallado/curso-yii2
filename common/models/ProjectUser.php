@@ -89,8 +89,4 @@ class ProjectUser extends ActiveRecord
         return User::findIdentity($id)->username;
     }
 
-    public function getRol($id)
-    {
-        return Role::findOne($id)->nombre;
-    }
 }

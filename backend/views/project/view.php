@@ -59,16 +59,16 @@ YiiAsset::register($this);
         ],
     ]) ?>
 
-
-    <p>
+    <!-- Sección de tareas -->
+    <p class="d-inline-block">
         <!--<?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>-->
-        <?= Html::a('Asignar usuario',['project-user/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear tarea',['task/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <!-- Sección de tareas -->
-    <p>
+    <!-- Botón para añadir colaborador de proyecto -->
+    <p class="d-inline-block">
         <!--<?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>-->
-        <?= Html::a('Crear tareas',['task/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Asignar integrante',['project-user/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
