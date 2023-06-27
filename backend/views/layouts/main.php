@@ -45,7 +45,6 @@ AppAsset::register($this);
                 'template'=>'<a href="{url}" class="href_class">{label}</a>',
                 'items' =>[
                         ['label' => 'Proyectos', 'url' => ['/project']],
-                        ['label' => 'Tareas', 'url' => ['/task']],
                         ['label' => 'Estatus', 'url' => ['/status']],
                         ['label' => 'Roles', 'url' => ['/role']],
                         ['label' => 'Asignación de Proyectos', 'url' => ['/project-user']],

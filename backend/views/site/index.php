@@ -8,7 +8,7 @@ $this->title = 'Gestor de Proyectos';
 
     <div class="jumbotron text-center bg-transparent">
         <?php if (!Yii::$app->user->isGuest): ?>
-            <h1 class="display-4">¡<?= Yii::$app->user->identity->username ?> Bienvenido al Gestor de Proyectos!</h1>
+            <h1 class="display-4">¡<?= Yii::$app->user->identity->username ?>, Bienvenido al Gestor de Proyectos!</h1>
         <?php else: ?>
             <h1 class="display-4">¡Bienvenido al Gestor de Proyectos!</h1>
         <?php endif; ?>

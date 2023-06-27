@@ -7,6 +7,7 @@ use common\models\search\ProjectUserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ProjectUserController implements the CRUD actions for ProjectUser model.
@@ -64,11 +65,12 @@ class ProjectUserController extends Controller
     /**
      * Creates a new ProjectUser model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
-    public function actionCreate()
+    public function actionCreate($project_id)
     {
         $model = new ProjectUser();
+        $model -> project_id = $project_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -88,7 +90,7 @@ class ProjectUserController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $project_id Project ID
      * @param int $user_id User ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($project_id, $user_id)
@@ -109,7 +111,7 @@ class ProjectUserController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $project_id Project ID
      * @param int $user_id User ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($project_id, $user_id)

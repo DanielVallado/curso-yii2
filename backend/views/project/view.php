@@ -59,8 +59,16 @@ YiiAsset::register($this);
         ],
     ]) ?>
 
+
     <p>
-        <?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>
+        <!--<?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>-->
+        <?= Html::a('Asignar usuario',['project-user/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <!-- Sección de tareas -->
+    <p>
+        <!--<?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>-->
+        <?= Html::a('Crear tareas',['task/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -95,12 +103,13 @@ YiiAsset::register($this);
             //'updated_at',
             //'created_by',
             //'updated_by',
-            [
-                'class' => ActionColumn::class,
-                'urlCreator' => static function ($action, Task $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }
-            ],
+            //[
+            //    'class' => ActionColumn::class,
+            //    'urlCreator' => static function ($action, Task $model, $key, $index, $column) {
+            //        return Url::toRoute([$action, 'id' => $model->id]);
+            //    }
+            //],
+            ['class' => ActionColumn::class,'controller' => 'task','template' => '{view} {update} {delete}'],
         ],
     ]) ?>
 

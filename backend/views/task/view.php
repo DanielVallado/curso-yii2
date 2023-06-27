@@ -7,7 +7,6 @@ use yii\widgets\DetailView;
 
 // Models
 use common\models\Status;
-use common\models\User;
 
 /** @var yii\web\View $this */
 /** @var common\models\Task $model */

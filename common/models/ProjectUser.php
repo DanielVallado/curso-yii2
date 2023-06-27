@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "project_user".
@@ -15,7 +17,7 @@ use Yii;
  * @property Role $role
  * @property User $user
  */
-class ProjectUser extends \yii\db\ActiveRecord
+class ProjectUser extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -46,16 +48,16 @@ class ProjectUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_id' => 'Proyecto ID',
-            'user_id' => 'Usuario ID',
-            'role_id' => 'Rol ID',
+            'project_id' => 'Proyecto',
+            'user_id' => 'Usuario',
+            'role_id' => 'Rol',
         ];
     }
 
     /**
      * Gets query for [[Project]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getProject()
     {
@@ -65,7 +67,7 @@ class ProjectUser extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Role]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRole()
     {
@@ -75,10 +77,20 @@ class ProjectUser extends \yii\db\ActiveRecord
     /**
      * Gets query for [[User]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getUsername($id)
+    {
+        return User::findIdentity($id)->username;
+    }
+
+    public function getRol($id)
+    {
+        return Role::findOne($id)->nombre;
     }
 }

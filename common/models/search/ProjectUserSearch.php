@@ -37,9 +37,14 @@ class ProjectUserSearch extends ProjectUser
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $project_id=null)
     {
-        $query = ProjectUser::find();
+        if($project_id) {
+            $query = ProjectUser::find()->where(['project_id' => $project_id]); // SELECT * FROM task;
+        }
+        else {
+            $query = ProjectUser::find();
+        }
 
         // add conditions that should always apply here
 

@@ -40,10 +40,14 @@ class TaskSearch extends Task
      */
     public function search($params, $project_id=null)
     {
+        if ($project_id) {
         $query = Task::find()->where(['project_id' => $project_id]); // SELECT * FROM task;
+        }
+        else {
+            $query = Task::find();
+        }
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
