@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
+
 $this->title = 'Gestor de Proyectos';
 ?>
 <div class="site-index">
@@ -13,12 +15,16 @@ $this->title = 'Gestor de Proyectos';
             <h1 class="display-4">¡Bienvenido al Gestor de Proyectos!</h1>
         <?php endif; ?>
 
+        <img src="<?= Url::to(Yii::$app->params['urlLogotipo'], true) ?>" width="50%" alt="Imagen de enzabezado" class="mt-3 mb-3">
+
         <p class="lead">Este es un gestor de proyectos y tareas elaborado con Yii2.</p>
 
-        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
+<!--        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>-->
     </div>
 
-    <div class="body-content">
+    
+
+    <!--<div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
@@ -53,5 +59,6 @@ $this->title = 'Gestor de Proyectos';
             </div>
         </div>
 
-    </div>
+    </div>-->
+
 </div>

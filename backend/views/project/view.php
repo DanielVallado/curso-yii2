@@ -5,14 +5,12 @@ use yii\grid\GridView;
 use yii\grid\SerialColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 // Models
 use common\models\Project;
 use common\models\Status;
-use common\models\Task;
 
 /** @var yii\web\View $this */
 /** @var common\models\Project $model */
@@ -68,7 +66,7 @@ YiiAsset::register($this);
     <!-- Botón para añadir colaborador de proyecto -->
     <p class="d-inline-block">
         <!--<?= Html::a('Crear Tarea', ['create'], ['class' => 'btn btn-success']) ?>-->
-        <?= Html::a('Asignar integrante',['project-user/create', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver integrantes',['project-user/index', 'project_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -114,4 +112,19 @@ YiiAsset::register($this);
     ]) ?>
 
 </div>
+
+<?php
+/* Código nativo php
+$sql  = 'select * from task';
+$lista_tareas = Task::findBySql( $sql )->all();
+
+foreach( $lista_tareas as $reg=>$value  )
+{
+    echo "Id de Tarea: " . $value->id . "<br>";
+    echo "Nombre de tarea: " . $value->name;
+
+    echo "<br><hr>";
+}
+
+*/?>
 

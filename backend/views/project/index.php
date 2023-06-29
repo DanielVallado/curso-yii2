@@ -1,6 +1,9 @@
 <?php
 
+use yii\grid\SerialColumn;
 use common\models\Project;
+use common\models\User;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -27,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => SerialColumn::class],
 
             //'id',
             'name',
@@ -35,15 +38,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             'updated_at',
             //'created_by',
-            'updated_by',
+            [
+                'attribute' =>'updated_by',
+                'value' => static function($model)
+                {
+                    return User::findOne($model->updated_by)->username;
+                },
+                'filter' => ArrayHelper::map(User::find()->all(),'id','nombre'),
+            ],
             [
                 'class' => ActionColumn::class,
-                'urlCreator' => function ($action, Project $model, $key, $index, $column) {
+                'urlCreator' => static function ($action, Project $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
-    ]); ?>
+    ]) ?>
 
 
 </div>

@@ -37,10 +37,10 @@ class ProjectUserController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($project_id)
     {
         $searchModel = new ProjectUserSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams, $project_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -70,11 +70,11 @@ class ProjectUserController extends Controller
     public function actionCreate($project_id)
     {
         $model = new ProjectUser();
-        $model -> project_id = $project_id;
+        $model->project_id = $project_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['project/view', 'id' => $model->project_id, 'class' => 'project']);
+                return $this->redirect(['project/view', 'id' => $project_id, 'class' => 'project']);
             }
         } else {
             $model->loadDefaultValues();
@@ -82,8 +82,10 @@ class ProjectUserController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'project_id' => $project_id, // Pasa el valor de project_id a la vista
         ]);
     }
+
 
     /**
      * Updates an existing ProjectUser model.

@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use common\models\Project;
+use common\models\ProjectUser;
 use common\models\search\ProjectSearch;
 use common\models\search\TaskSearch;
+use common\models\Task;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -69,7 +72,7 @@ class ProjectController extends Controller
     /**
      * Creates a new Project model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -92,7 +95,7 @@ class ProjectController extends Controller
      * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -112,11 +115,20 @@ class ProjectController extends Controller
      * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
+        if (Task::find()->where(['project_id' => $id])->exists())
+        {
+            Task::deleteAll(['project_id' => $id]);
+        }
+
+        if (ProjectUser::find()->where(['project_id' => $id])->exists()) {
+            ProjectUser::deleteAll(['project_id' => $id]);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

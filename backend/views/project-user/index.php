@@ -16,6 +16,8 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Asignación de Proyectos';
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['project/index']];
+$this->params['breadcrumbs'][] = ['label' => Project::findOne($_GET['project_id'])->name, 'url' => ['project/view', 'id' => $_GET['project_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-user-index">
@@ -23,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Asignar Proyecto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Asignar Integrante', ['create', 'project_id' => $_GET['project_id']], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

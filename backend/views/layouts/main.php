@@ -40,7 +40,11 @@ AppAsset::register($this);
         ];
 
         if (!Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => 'Proyectos', 'url' => ['/site/index'],
+            $menuItems[] = ['label' => 'Proyectos', 'url' => ['/project']];
+            $menuItems[] = ['label' => 'Estatus', 'url' => ['/status']];
+            $menuItems[] = ['label' => 'Roles', 'url' => ['/role']];
+
+            /*$menuItems[] = ['label' => 'Proyectos', 'url' => ['/site/index'],
                 'options' =>['class' =>'dropdown'],
                 'template'=>'<a href="{url}" class="href_class">{label}</a>',
                 'items' =>[
@@ -49,7 +53,7 @@ AppAsset::register($this);
                         ['label' => 'Roles', 'url' => ['/role']],
                         ['label' => 'Asignación de Proyectos', 'url' => ['/project-user']],
                     ],
-                ];
+                ];*/
         }
 
         echo Nav::widget([
